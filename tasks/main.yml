@@ -5,5 +5,3 @@
   template: src=shell-timeout.sh.j2 dest=/etc/profile.d/shell-timeout.sh mode=0644 owner=root group=root
   when: vg_hardening_shell_timeout_seconds > 0
   tags: hardening
-
--
