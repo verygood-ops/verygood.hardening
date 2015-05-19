@@ -1,0 +1,3 @@
+---
+# defaults file for verygood.hardening
+vg_hardening_shell_timeout_seconds: 600
