@@ -1,2 +1,4 @@
 ---
 # handlers file for verygood.hardening
+- name: restart sshd
+  command: service ssh reload
