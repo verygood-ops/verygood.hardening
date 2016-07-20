@@ -10,3 +10,31 @@
   lineinfile: dest=/etc/ssh/sshd_config regexp="^PermitRootLogin.*" line="PermitRootLogin no"
   tags: hardening
   notify: restart sshd
+
+- name: remove requiretty from sudoers
+  command: sed -i -e '/^Defaults    requiretty/ d' /etc/sudoers
+  tags: hardening
+
+- name: tight up ssh ciphers
+  lineinfile:
+    dest=/etc/ssh/{{item}}
+    state=present
+    regexp='^Ciphers'
+    line='Ciphers aes256-ctr,aes192-ctr,aes128-ctr,aes256-cbc,aes192-cbc,aes128-cbc,3des-cbc'
+  tags: hardening
+  notify: restart sshd
+  with_items:
+    - sshd_config
+    - ssh_config
+
+- name: tight up macs ciphers
+  lineinfile:
+    dest=/etc/ssh/{{item}}
+    state=present
+    regexp='^MACs'
+    line='MACs hmac-sha1'
+  tags: hardening
+  notify: restart sshd
+  with_items:
+    - sshd_config
+    - ssh_config
