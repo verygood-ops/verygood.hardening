@@ -1,6 +1,8 @@
 Role Name
 =========
 
+[![CircleCI](https://circleci.com/gh/verygood-ops/verygood.hardening.svg?style=svg)](https://circleci.com/gh/verygood-ops/verygood.hardening)
+
 Makes Ubuntu hard
 
 Role Variables

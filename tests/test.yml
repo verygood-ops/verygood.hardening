@@ -1,0 +1,7 @@
+---
+- hosts: localhost
+  become: yes
+  vars_files:
+    - ../defaults/main.yml
+  roles:
+    - verygood.hardening 
