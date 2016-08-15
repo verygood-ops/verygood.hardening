@@ -38,3 +38,6 @@
   with_items:
     - sshd_config
     - ssh_config
+
+- name: removing world write/execute permissions from python dist packages
+  file: dest=/usr/local/lib/python2.7/dist-packages recurse=yes state=directory mode="o-wx"
