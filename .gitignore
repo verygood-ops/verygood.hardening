@@ -29,3 +29,5 @@ docsite/_static/websupport.js
 # deb building stuff...
 debian/
 
+# Molecule stuff
+.molecule/
