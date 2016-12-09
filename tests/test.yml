@@ -4,4 +4,4 @@
   vars_files:
     - ../defaults/main.yml
   roles:
-    - verygood.hardening 
+    - verygood.hardening

@@ -31,3 +31,13 @@ debian/
 
 # Molecule stuff
 .molecule/
+
+# vagrant 
+.vagrant/
+
+# ansible
+playbook.retry
+
+# pycharm
+.idea/
+
