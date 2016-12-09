@@ -12,7 +12,7 @@
   notify: restart sshd
 
 - name: remove requiretty from sudoers
-  lineinfile: dest=/etc/sudoers regexp="^Defaults.*requiretty" state=absent
+  lineinfile: dest=/etc/sudoers regexp="^Defaults(\s+\t+)requiretty" state=absent
   tags: hardening
 
 - name: tight up ssh ciphers
