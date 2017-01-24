@@ -29,3 +29,15 @@ docsite/_static/websupport.js
 # deb building stuff...
 debian/
 
+# Molecule stuff
+.molecule/
+
+# vagrant 
+.vagrant/
+
+# ansible
+playbook.retry
+
+# pycharm
+.idea/
+

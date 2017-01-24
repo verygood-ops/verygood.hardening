@@ -1,4 +1,4 @@
 ---
 # handlers file for verygood.hardening
 - name: restart sshd
-  command: service ssh reload
+  service: name={{ ssh_service_name }} enabled=yes state=reloaded
