@@ -4,7 +4,7 @@
 - name: define ssh service name
   set_fact:
     ssh_service_name: 'sshd'
-  when: ansible_distribution == 'CentOS'
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Amazon'
 
 - name: auto logout for shell
   template: src=shell-timeout.sh.j2 dest=/etc/profile.d/shell-timeout.sh mode=0644 owner=root group=root
