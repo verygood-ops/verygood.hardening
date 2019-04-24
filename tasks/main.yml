@@ -6,10 +6,11 @@
     ssh_service_name: 'sshd'
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'Amazon'
 
-- name: auto logout for shell
-  template: src=shell-timeout.sh.j2 dest=/etc/profile.d/shell-timeout.sh mode=0644 owner=root group=root
-  when: vg_hardening_shell_timeout_seconds > 0
-  tags: hardening
+# because of conflict with the other same profile settings in "autologout.sh"
+#- name: auto logout for shell
+#  template: src=shell-timeout.sh.j2 dest=/etc/profile.d/shell-timeout.sh mode=0644 owner=root group=root
+#  when: vg_hardening_shell_timeout_seconds > 0
+#  tags: hardening
 
 - name: remove root login
   lineinfile: dest=/etc/ssh/sshd_config regexp="^PermitRootLogin.*" line="PermitRootLogin no"
