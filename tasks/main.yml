@@ -44,6 +44,17 @@
     - sshd_config
     - ssh_config
 
+# requires for Ubuntu 18.04 and newer
+- name: define CASignatureAlgorithms
+  lineinfile:
+    dest=/etc/ssh/{{item}}
+    state=present
+    regexp='^CASignatureAlgorithms'
+    line='CASignatureAlgorithms ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,ssh-ed25519,rsa-sha2-512,rsa-sha2-256,ssh-rsa'
+  tags: hardening
+  notify: restart sshd
+  with_items:
+    - sshd_config
+
 - name: removing world write/execute permissions from python dist packages
   file: dest=/usr/local/lib/python2.7/dist-packages recurse=yes state=directory mode="o-wx"
-
