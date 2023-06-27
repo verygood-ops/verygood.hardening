@@ -3,6 +3,7 @@ version: 2
 jobs:
   build:
     machine:
+      image: "ubuntu-2004:current"
       enabled: true
     environment:
       AWS_DEFAULT_REGION: us-west-2
