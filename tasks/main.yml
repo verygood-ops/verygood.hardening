@@ -3,7 +3,7 @@
 
 - name: define ssh service name
   set_fact:
-    ssh_service_name: 'sshd'
+    ssh_service_name: "sshd"
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'Amazon'
 
 - name: auto logout for shell
@@ -21,11 +21,10 @@
   tags: hardening
 
 - name: tight up ssh ciphers
-  lineinfile:
-    dest=/etc/ssh/{{item}}
+  lineinfile: dest=/etc/ssh/{{item}}
     state=present
     regexp='^Ciphers'
-    line='Ciphers aes256-ctr,aes192-ctr,aes128-ctr,aes256-cbc,aes192-cbc,aes128-cbc,3des-cbc'
+    line='Ciphers aes256-ctr,aes192-ctr,aes128-ctr'
   tags: hardening
   notify: restart sshd
   with_items:
@@ -33,21 +32,29 @@
     - ssh_config
 
 - name: tight up macs ciphers
-  lineinfile:
-    dest=/etc/ssh/{{item}}
+  lineinfile: dest=/etc/ssh/{{item}}
     state=present
     regexp='^MACs'
-    line='MACs hmac-sha1'
+    line='MACs hmac-sha2-512,hmac-sha2-256'
   tags: hardening
   notify: restart sshd
   with_items:
     - sshd_config
     - ssh_config
 
-# requires for Ubuntu 18.04 and newer
+- name: tight up KexAlgorithms
+  lineinfile: dest=/etc/ssh/{{item}}
+    state=present
+    regexp='^KexAlgorithms'
+    line='KexAlgorithms curve25519-sha256,ecdh-sha2-nistp384,ecdh-sha2-nistp256'
+  tags: hardening
+  notify: restart sshd
+  with_items:
+    - sshd_config
+    - ssh_config
+
 - name: define CASignatureAlgorithms
-  lineinfile:
-    dest=/etc/ssh/{{item}}
+  lineinfile: dest=/etc/ssh/{{item}}
     state=present
     regexp='^CASignatureAlgorithms'
     line='CASignatureAlgorithms ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,ssh-ed25519,rsa-sha2-512,rsa-sha2-256,ssh-rsa'
