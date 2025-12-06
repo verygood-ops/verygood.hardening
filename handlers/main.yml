@@ -1,4 +1,7 @@
 ---
 # handlers file for verygood.hardening
+# Note: Using state=restarted instead of state=reloaded for Ubuntu 24.04+
+# compatibility. Ubuntu 24.04 uses socket activation (ssh.socket) by default,
+# so ssh.service may not be "active" during Packer builds.
 - name: restart sshd
-  service: name={{ ssh_service_name }} enabled=yes state=reloaded
+  service: name={{ ssh_service_name }} enabled=yes state=restarted
